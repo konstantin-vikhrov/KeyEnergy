@@ -1,5 +1,3 @@
-package Azure;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -13,7 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FixWorkItemStates {
-    final static String url = "https://dev.azure.com/keyenergy/Database%20and%20Integrations%20Modernization%20Project/_queries/favorites/";
+    final static String url = "https://portal.azure.com/#home";
+    //ADF: https://adf.azure.com/en/home?factory=%2Fsubscriptions%2F053f6612-136f-4767-acbf-15de82d70895%2FresourceGroups%2Frg-integrations-qat-scus-001%2Fproviders%2FMicrosoft.DataFactory%2Ffactories%2Fadf-integrations-qat-scus-001
+    //
 
     public static void main(String[] args) {
         final String tableLocator = "//table[@aria-label='Query Results Table']/tbody";
@@ -56,7 +56,7 @@ public class FixWorkItemStates {
                 }
             }
             rows = driver.findElements(queryRows);
-            js.executeScript("arguments[0].scrollIntoView(true);", rows.get(rowCount - 1));
+            //js.executeScript("arguments[0].scrollIntoView(true);", rows.get(rowCount - 1));
         }
     }
 }

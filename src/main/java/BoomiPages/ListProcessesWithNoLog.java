@@ -1,4 +1,4 @@
-package Boomi;
+package BoomiPages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
