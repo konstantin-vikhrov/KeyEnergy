@@ -1,10 +1,11 @@
 package Tests;
 
+import AzurePages.DataFactoryPage;
+import AzurePages.DataFactoryStudioPage;
 import AzurePages.HomePage;
 import com.google.common.io.Files;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 
@@ -12,21 +13,21 @@ import java.io.File;
 import java.io.IOException;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class BaseTests {
+public class BaseTestSuite {
     private WebDriver driver;
-    protected HomePage homePage;
-    protected final String resourceFolderPath = "C:\\Users\\konstantin.vikhrov\\IdeaProjects\\KeyEnergy\\src\\test\\resources";
-    //By xPathContains = By.xpath("//div[contains(text(), 'powered')]");
-    //By xPathStartsWith = By.xpath("//div[starts-with(@class, 'powered')]");
-    //By xPathIndex = By.xpath("(//div/img) [last()]");
-    //By xPathImages_ChildrenOfDivsOrAs = By.xpath("//div[child::img] | //a[child::img]");
+    HomePage homePage;
+    final String azureHomeURL = "https://portal.azure.com/#home";
+    final String resourceFolderPath = "C:\\Users\\konstantin.vikhrov\\IdeaProjects\\KeyEnergy\\src\\test\\resources";
+    final String qaFolderPath = "C:\\Users\\konstantin.vikhrov\\OneDrive - Enroute\\Documents";
+    final int pipelineExecutionStep = 2;
+    final String storageRoot = "integrations";
+    DataFactoryStudioPage dataFactoryStudioPage;
 
     @BeforeAll
     void setUp() {
-        //System.setProperty("webdriver.chrome.driver", "resources/chromedriver.exe");
         //driver = new ChromeDriver(getChromeOptions());
         driver = new EdgeDriver();
-        driver.get("https://portal.azure.com/#home");
+        driver.get(azureHomeURL);
         driver.manage().window().maximize();
         homePage = new HomePage(driver);
         //driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
@@ -36,6 +37,32 @@ public class BaseTests {
     @AfterAll
     void tearDown() {
         driver.quit();
+    }
+
+    protected void openADFPipeline(String pipelineFolder, String pipelineName) {
+        DataFactoryPage dataFactoryPage = homePage.clickDataFactoryLink();
+        dataFactoryStudioPage = dataFactoryPage.clickLaunchStudioButton();
+        dataFactoryStudioPage.openPipelineList();
+        dataFactoryStudioPage.clickPipelineListItem(pipelineFolder);
+        dataFactoryStudioPage.clickElement(pipelineName);
+    }
+
+    protected void testPipelineExecution() {
+
+
+        //Assertions.assertTrue(redirectPage.isHereLinkVisible());
+    }
+
+    @Test
+    @Order(2)
+    void testAuditRecords() {
+
+    }
+
+    @Test
+    @Order(3)
+    void testFailureNotification() {
+
     }
 
     protected void takeScreenshot() {
