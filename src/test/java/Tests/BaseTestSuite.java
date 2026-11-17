@@ -18,7 +18,7 @@ public class BaseTestSuite {
     HomePage homePage;
     final String azureHomeURL = "https://portal.azure.com/#home";
     final String resourceFolderPath = "C:\\Users\\konstantin.vikhrov\\IdeaProjects\\KeyEnergy\\src\\test\\resources";
-    final String qaFolderPath = "C:\\Users\\konstantin.vikhrov\\OneDrive - Enroute\\Documents";
+    public final String localQaFolder = "C:\\Users\\konstantin.vikhrov\\OneDrive - Enroute\\Documents";
     final int pipelineExecutionStep = 2;
     final String storageRoot = "integrations";
     DataFactoryStudioPage dataFactoryStudioPage;
@@ -45,6 +45,14 @@ public class BaseTestSuite {
         dataFactoryStudioPage.openPipelineList();
         dataFactoryStudioPage.clickPipelineListItem(pipelineFolder);
         dataFactoryStudioPage.clickElement(pipelineName);
+    }
+
+    public void setGlobalParameter(String paramName, String paramValue) {
+
+    }
+
+    public void setPipelineConfig(String localFolder, String fileName) {
+
     }
 
     protected void testPipelineExecution() {
